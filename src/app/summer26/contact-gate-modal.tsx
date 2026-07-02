@@ -18,6 +18,7 @@ interface FormErrors {
 }
 
 const CONTACT_GATE_STORAGE_KEY = "summer26_contact_gate_completed_v1";
+const CONTACT_GATE_PROFILE_STORAGE_KEY = "summer26_contact_gate_profile_v1";
 const CONTACT_GATE_WISTIA_SRC =
   "https://fast.wistia.net/embed/iframe/09rnmxq8yg?videoFoam=true&autoPlay=true&silentAutoPlay=allow&muted=true&volume=0&endVideoBehavior=loop&controlsVisibleOnLoad=false&playbar=false&fullscreenButton=false&smallPlayButton=false&volumeControl=false";
 
@@ -118,12 +119,40 @@ export function hasCompletedContactGate(): boolean {
   if (typeof window === "undefined") return false;
   return (
     window.localStorage.getItem(CONTACT_GATE_STORAGE_KEY) === "true" ||
-    window.sessionStorage.getItem(CONTACT_GATE_STORAGE_KEY) === "true"
+    window.sessionStorage.getItem(CONTACT_GATE_STORAGE_KEY) === "true" ||
+    hasStoredContactGateProfile()
   );
 }
 
-function markContactGateCompleted() {
+function getStoredContactGateProfile(): FormValues {
+  if (typeof window === "undefined") return { name: "", phone: "", email: "" };
+  try {
+    const raw = window.localStorage.getItem(CONTACT_GATE_PROFILE_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return {
+      name: typeof parsed.name === "string" ? parsed.name : "",
+      phone: typeof parsed.phone === "string" ? parsed.phone : "",
+      email: typeof parsed.email === "string" ? parsed.email : "",
+    };
+  } catch {
+    return { name: "", phone: "", email: "" };
+  }
+}
+
+function hasStoredContactGateProfile(): boolean {
+  return !hasErrors(validate(getStoredContactGateProfile()));
+}
+
+function markContactGateCompleted(values: FormValues) {
   if (typeof window === "undefined") return;
+  window.localStorage.setItem(
+    CONTACT_GATE_PROFILE_STORAGE_KEY,
+    JSON.stringify({
+      name: values.name.trim(),
+      phone: values.phone.trim(),
+      email: values.email.trim(),
+    }),
+  );
   window.localStorage.setItem(CONTACT_GATE_STORAGE_KEY, "true");
   window.sessionStorage.setItem(CONTACT_GATE_STORAGE_KEY, "true");
 }
@@ -156,7 +185,7 @@ interface ContactGateModalProps {
 
 export function ContactGateModal({ isOpen, language, onUnlock }: ContactGateModalProps) {
   const t = CONTACT_GATE_TEXT[language];
-  const [values, setValues] = useState<FormValues>({ name: "", phone: "", email: "" });
+  const [values, setValues] = useState<FormValues>(() => getStoredContactGateProfile());
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<keyof FormValues, boolean>>({
     name: false,
@@ -263,7 +292,7 @@ export function ContactGateModal({ isOpen, language, onUnlock }: ContactGateModa
       }
 
       setStatus("success");
-      markContactGateCompleted();
+      markContactGateCompleted(values);
       window.setTimeout(onUnlock, 800);
     } catch (err) {
       setServerError(err instanceof Error ? err.message : "unknown");
