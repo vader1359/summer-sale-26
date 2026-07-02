@@ -454,7 +454,7 @@ function ProductCard({ product, lang, isSold }: { product: PreorderProduct; lang
           }`}
         />
         {isSold && (
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#930000] px-7 py-3 text-[24px] font-black uppercase leading-none tracking-[0.12em] text-white shadow-xl sm:text-[30px]">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#930000]/70 px-7 py-3 text-[24px] font-black uppercase leading-none tracking-[0.12em] text-white shadow-xl sm:text-[30px]">
             Sold
           </span>
         )}

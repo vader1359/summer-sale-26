@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import productData from "../summer26/products.json";
 
 type AdminProduct = {
@@ -67,9 +67,12 @@ function getDiscountPercent(retailPrice: number, preorderPrice: number): number 
 
 export default function SoldAdminPage() {
   const [brand, setBrand] = useState<BrandFilter>("all");
+  const [query, setQuery] = useState("");
   const [soldSkus, setSoldSkus] = useState<Set<string>>(() => new Set());
   const [error, setError] = useState("");
   const [menu, setMenu] = useState<{ sku: string; x: number; y: number } | null>(null);
+  const longPressTimerRef = useRef<number | null>(null);
+  const suppressNextClickRef = useRef(false);
 
   useEffect(() => {
     fetch("/api/summer26/sold-status", { cache: "no-store" })
@@ -85,13 +88,32 @@ export default function SoldAdminPage() {
   useEffect(() => {
     const closeMenu = () => setMenu(null);
     window.addEventListener("click", closeMenu);
-    return () => window.removeEventListener("click", closeMenu);
+    return () => {
+      window.removeEventListener("click", closeMenu);
+      if (longPressTimerRef.current) {
+        window.clearTimeout(longPressTimerRef.current);
+      }
+    };
   }, []);
 
   const filteredProducts = useMemo(() => {
-    if (brand === "all") return PRODUCTS;
-    return PRODUCTS.filter((product) => getProductBrand(product.sku) === brand);
-  }, [brand]);
+    const normalizedQuery = query.trim().toLowerCase();
+    return PRODUCTS.filter((product) => {
+      const matchesBrand = brand === "all" || getProductBrand(product.sku) === brand;
+      if (!matchesBrand) return false;
+      if (!normalizedQuery) return true;
+      return [product.sku, product.short_name, product.product_name, product.category]
+        .join(" ")
+        .toLowerCase()
+        .includes(normalizedQuery);
+    });
+  }, [brand, query]);
+
+  const clearLongPressTimer = () => {
+    if (!longPressTimerRef.current) return;
+    window.clearTimeout(longPressTimerRef.current);
+    longPressTimerRef.current = null;
+  };
 
   const setSold = async (sku: string, sold: boolean) => {
     setMenu(null);
@@ -139,34 +161,42 @@ export default function SoldAdminPage() {
             Preview
           </Link>
         </div>
-        <div className="flex flex-wrap items-center gap-7 border-t border-[#eeeeee] px-5 py-4 sm:gap-12 sm:px-8 lg:px-[60px]">
-          {brands.map((item) => {
-            const logo = BRAND_LOGOS[item.id];
-            const isSelected = brand === item.id;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setBrand(item.id)}
-                className={`flex min-h-9 items-center justify-center text-[13px] font-medium transition sm:text-[14px] ${
-                  isSelected ? "opacity-100" : "opacity-60 hover:opacity-100"
-                }`}
-              >
-                {logo ? (
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={logo.width}
-                    height={logo.height}
-                    className={logo.className}
-                    style={{ width: "auto" }}
-                  />
-                ) : (
-                  item.label
-                )}
-              </button>
-            );
-          })}
+        <div className="flex flex-col gap-4 border-t border-[#eeeeee] px-5 py-4 sm:px-8 lg:px-[60px]">
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search SKU or product"
+            className="h-11 w-full border border-[#D8D8D8] px-3 text-[14px] outline-none transition focus:border-[#111111] sm:max-w-[360px]"
+          />
+          <div className="flex flex-wrap items-center gap-7 sm:gap-12">
+            {brands.map((item) => {
+              const logo = BRAND_LOGOS[item.id];
+              const isSelected = brand === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setBrand(item.id)}
+                  className={`flex min-h-9 items-center justify-center text-[13px] font-medium transition sm:text-[14px] ${
+                    isSelected ? "opacity-100" : "opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  {logo ? (
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={logo.width}
+                      height={logo.height}
+                      className={logo.className}
+                      style={{ width: "auto" }}
+                    />
+                  ) : (
+                    item.label
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </header>
 
@@ -188,6 +218,23 @@ export default function SoldAdminPage() {
                 event.preventDefault();
                 setMenu({ sku: product.sku, x: event.clientX, y: event.clientY });
               }}
+              onClick={(event) => {
+                if (!suppressNextClickRef.current) return;
+                suppressNextClickRef.current = false;
+                event.preventDefault();
+                event.stopPropagation();
+              }}
+              onTouchStart={(event) => {
+                clearLongPressTimer();
+                const touch = event.touches[0];
+                longPressTimerRef.current = window.setTimeout(() => {
+                  suppressNextClickRef.current = true;
+                  setMenu({ sku: product.sku, x: touch.clientX, y: touch.clientY });
+                }, 550);
+              }}
+              onTouchMove={clearLongPressTimer}
+              onTouchEnd={clearLongPressTimer}
+              onTouchCancel={clearLongPressTimer}
               className="group flex h-full w-full flex-col bg-white"
             >
               <div className="relative h-[260px] w-full overflow-hidden bg-white sm:h-[320px] lg:h-[360px]">
@@ -199,7 +246,7 @@ export default function SoldAdminPage() {
                   className="h-full w-full object-contain p-8 transition duration-500 group-hover:scale-105 sm:p-10 lg:p-12"
                 />
                 {isSold && (
-                  <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#930000] px-7 py-3 text-[24px] font-black uppercase leading-none tracking-[0.12em] text-white shadow-xl sm:text-[30px]">
+                  <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#930000]/70 px-7 py-3 text-[24px] font-black uppercase leading-none tracking-[0.12em] text-white shadow-xl sm:text-[30px]">
                     Sold
                   </span>
                 )}
