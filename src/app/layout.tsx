@@ -7,7 +7,7 @@ const summerSaleDescription =
 const summerSaleImageAlt = "nanoHome Summer Sale 2026 hero banner";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nanohome.vn"),
+  metadataBase: new URL("https://sale.nanohome.vn"),
   title: summerSaleTitle,
   description: summerSaleDescription,
   icons: {
