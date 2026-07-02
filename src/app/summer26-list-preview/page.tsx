@@ -3,7 +3,8 @@ import PreorderPage from "../summer26-list/product-list-page";
 
 export const metadata: Metadata = {
   title: "Summer Sale Product List Preview | nanoHome",
-  description: "Preview the nanoHome Summer Sale product list before launch.",
+  description:
+    "Preview danh sách sản phẩm nanoHome Summer Sale 2026 với ưu đãi giới hạn cho USM Haller và các thiết kế nội thất chọn lọc.",
   robots: {
     index: false,
     follow: false,

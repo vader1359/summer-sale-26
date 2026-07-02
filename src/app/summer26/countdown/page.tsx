@@ -4,9 +4,9 @@ import { CountdownClient } from "./countdown-client";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Summer Sale opens July 3rd at 9:00 AM | nanoHome",
+  title: "nanoHome Summer Sale opens July 3rd at 9:00 AM",
   description:
-    "The nanoHome Summer Sale opens at 9:00 AM on July 3rd, 2026. Stay ready for limited USM Haller offers.",
+    "nanoHome Summer Sale 2026 opens at 9:00 AM on July 3rd, with limited offers on USM Haller and selected design pieces.",
   robots: {
     index: false,
     follow: true,
