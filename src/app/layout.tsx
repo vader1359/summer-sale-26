@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     images: [
       {
-        url: "/figma/hero.png",
-        width: 3840,
-        height: 2160,
+        url: "/figma/banner_summersale26_2.jpg",
+        width: 4320,
+        height: 1920,
         alt: summerSaleImageAlt,
       },
     ],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: summerSaleDescription,
     images: [
       {
-        url: "/figma/hero.png",
+        url: "/figma/banner_summersale26_2.jpg",
         alt: summerSaleImageAlt,
       },
     ],

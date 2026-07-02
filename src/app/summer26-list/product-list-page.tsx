@@ -203,8 +203,8 @@ function NotificationBar({
 }) {
   const t = translations[lang];
   return (
-    <div className="relative w-full bg-[#F5F5F5]">
-      <div className="mx-auto flex min-h-10 max-w-[1440px] items-center justify-center px-10 py-2.5 text-center text-[12px] leading-snug text-[#111111]">
+    <div className="relative w-full bg-[#F8F8F8]">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-center px-10 py-3 text-center text-[12px] leading-[17px] text-[#111111]">
         {t.notificationBar.text}
         <button
           type="button"
@@ -671,7 +671,7 @@ function FinalPolicySection({ lang }: { lang: Language }) {
     <section id="final-policy" className="scroll-mt-24 bg-[#FEFAEE] px-5 py-8 sm:px-8 lg:px-[60px] lg:py-[40px]" aria-label={t.title}>
       <div className="mx-auto flex max-w-[1440px] flex-col gap-6 text-[#111111]">
         <h2 className="text-[20px] font-semibold uppercase leading-8 sm:text-[24px]">{t.title}</h2>
-        <div className="px-0 py-0 sm:px-6 sm:py-4">
+        <div>
           <div className="whitespace-pre-line text-[10px] font-normal leading-[14px] text-black">
             {t.body}
           </div>

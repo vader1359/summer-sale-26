@@ -350,7 +350,7 @@ export const translations: Record<Language, PreorderTranslation> = {
     notificationBar: {
       text: (
         <span>
-          nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.{" "}
+          nanoHome là nhà phân phối độc quyền các thương hiệu nội thất & đèn chiếu sáng cao cấp tại Việt Nam.{" "}
           <a
             href="https://nanohome.vn"
             className="font-bold underline underline-offset-2 hover:text-[#C70500]"
@@ -451,10 +451,9 @@ export const translations: Record<Language, PreorderTranslation> = {
       cta: "Liên hệ tư vấn"
     },
     finalPolicy: {
-      title: "CHÍNH SÁCH BÁN HÀNG PRE-ORDER",
+      title: "CHÍNH SÁCH BÁN HÀNG",
       body: `1. Thời gian áp dụng:
 • Chương trình khuyến mãi diễn ra từ ngày lúc 9am, Thứ 6 ngày 03/07/2026 đến hết 11:59pm, Chủ nhật ngày 05/07/2026.
-• Trường hợp Pre-Order USM: áp dụng đến hết 11:59pm, Chủ nhật ngày 05/07/2026.
 • Showroom nanoHome Gallery mở cửa từ 09:00 đến 18:00 hằng ngày.
 
 2. Điều khoản và Điều kiện chung:
@@ -501,7 +500,7 @@ export const translations: Record<Language, PreorderTranslation> = {
     notificationBar: {
       text: (
         <span>
-          nanoHome is the sole exclusive retailer of USM products in Vietnam.{" "}
+          nanoHome is the exclusive distributor of premium furniture and lighting brands in Vietnam.{" "}
           <a
             href="https://nanohome.vn"
             className="font-bold underline underline-offset-2 hover:text-[#C70500]"
@@ -686,7 +685,7 @@ For other provinces/cities and Nhà Bè, Hóc Môn, Củ Chi, Cần Giờ, Bình
     notificationBar: {
       text: (
         <span>
-          nanoHome은 베트남 내 유일한 USM 공식 독점 유통사입니다.{" "}
+          nanoHome은 베트남의 프리미엄 가구 및 조명 브랜드 독점 유통사입니다.{" "}
           <a
             href="https://nanohome.vn"
             className="font-bold underline underline-offset-2 hover:text-[#C70500]"

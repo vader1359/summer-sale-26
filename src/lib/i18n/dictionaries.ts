@@ -299,7 +299,7 @@ const dictionaries: Record<Language, Dictionary> = {
       goTo: "Đến",
     },
     header: {
-      announcement: "nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.",
+      announcement: "nanoHome là nhà phân phối độc quyền các thương hiệu nội thất & đèn chiếu sáng cao cấp tại Việt Nam.",
       visitLink: "Truy cập nanoHome",
       wishlist: "Yêu thích",
       bookConsultation: "Đặt lịch tư vấn",
@@ -535,7 +535,7 @@ const dictionaries: Record<Language, Dictionary> = {
     },
     home: {
       notice: {
-        announcement: "nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.",
+        announcement: "nanoHome là nhà phân phối độc quyền các thương hiệu nội thất & đèn chiếu sáng cao cấp tại Việt Nam.",
         link: "Truy cập nanoHome",
         closeAriaLabel: "Đóng thông báo",
       },
@@ -638,7 +638,7 @@ const dictionaries: Record<Language, Dictionary> = {
       goTo: "Go to",
     },
     header: {
-      announcement: "nanoHome is the exclusive authorized USM retailer in Vietnam.",
+      announcement: "nanoHome is the exclusive distributor of premium furniture and lighting brands in Vietnam.",
       visitLink: "Visit nanoHome",
       wishlist: "Wishlist",
       bookConsultation: "Book Consultation",
@@ -874,7 +874,7 @@ const dictionaries: Record<Language, Dictionary> = {
     },
     home: {
       notice: {
-        announcement: "nanoHome is the sole exclusive retailer of USM products in Vietnam.",
+        announcement: "nanoHome is the exclusive distributor of premium furniture and lighting brands in Vietnam.",
         link: "Visit nanoHome",
         closeAriaLabel: "Close notice",
       },
@@ -977,7 +977,7 @@ const dictionaries: Record<Language, Dictionary> = {
       goTo: "이동",
     },
     header: {
-      announcement: "nanoHome은 베트남 유일의 USM 공식 리테일러입니다.",
+      announcement: "nanoHome은 베트남의 프리미엄 가구 및 조명 브랜드 독점 유통사입니다.",
       visitLink: "nanoHome 방문하기",
       wishlist: "위시리스트",
       bookConsultation: "상담 예약",
@@ -1213,7 +1213,7 @@ const dictionaries: Record<Language, Dictionary> = {
     },
     home: {
       notice: {
-        announcement: "nanoHome은 베트남 내 유일한 USM 공식 독점 판매처입니다.",
+        announcement: "nanoHome은 베트남의 프리미엄 가구 및 조명 브랜드 독점 유통사입니다.",
         link: "nanoHome 방문하기",
         closeAriaLabel: "알림 닫기",
       },

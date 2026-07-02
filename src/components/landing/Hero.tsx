@@ -9,10 +9,10 @@ export function Hero() {
   return (
     <section className="w-full bg-[#fffdfa]">
       <Image
-        src="/figma/hero.png"
+        src="/figma/banner_summersale26_2.jpg"
         alt={t.home.hero.imageAlt}
-        width={2880}
-        height={1620}
+        width={4320}
+        height={1920}
         preload
         className="h-auto w-full object-contain"
         sizes="100vw"
