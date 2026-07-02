@@ -16,7 +16,7 @@ export function TopNoticeBar() {
         <span className="text-balance">
           {t.home.notice.announcement}
         </span>
-        <Link href="/summer26" className="shrink-0 whitespace-nowrap border-b border-black font-normal text-black transition-colors hover:text-zinc-600">
+        <Link href="/summer26-list" className="shrink-0 whitespace-nowrap border-b border-black font-normal text-black transition-colors hover:text-zinc-600">
           {t.home.notice.link}
         </Link>
       </div>

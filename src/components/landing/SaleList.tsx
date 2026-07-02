@@ -93,10 +93,10 @@ function SaleProductCard({ product }: { product: Product }) {
           {productName}
         </h3>
         <div className="mt-auto flex items-center gap-3">
-          <Link href="/summer26" className="flex h-9 items-center whitespace-nowrap rounded-full bg-black px-4 text-[14px] font-semibold leading-4 text-white">
+          <Link href="/summer26-list" className="flex h-9 items-center whitespace-nowrap rounded-full bg-black px-4 text-[14px] font-semibold leading-4 text-white">
             {t.home.saleList.offerCta}
           </Link>
-          <Link href="/summer26" className="flex h-9 items-center gap-1 whitespace-nowrap text-[14px] font-semibold leading-4 text-[#111]">
+          <Link href="/summer26-list" className="flex h-9 items-center gap-1 whitespace-nowrap text-[14px] font-semibold leading-4 text-[#111]">
             {t.home.saleList.consultationCta}
             <svg width="5" height="9" viewBox="0 0 5 9" fill="none">
               <path d="m1 1 3 3.5L1 8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />

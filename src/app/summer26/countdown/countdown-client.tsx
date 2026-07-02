@@ -82,7 +82,7 @@ export function CountdownClient() {
       setTimeLeft(nextTimeLeft);
 
       if (nextTimeLeft.total <= 0) {
-        window.location.replace("/summer26");
+        window.location.replace("/summer26-list");
       }
     };
 

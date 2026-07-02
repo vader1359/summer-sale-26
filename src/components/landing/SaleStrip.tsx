@@ -159,7 +159,7 @@ export function SaleStrip() {
           </div>
 
           <div>
-            <Link href="/summer26" className="flex shrink-0 items-center gap-[7.2px] whitespace-nowrap rounded-[104.4px] bg-black px-[16px] py-[14px] text-[14.4px] font-semibold leading-[19.2px] text-white">
+            <Link href="/summer26-list" className="flex shrink-0 items-center gap-[7.2px] whitespace-nowrap rounded-[104.4px] bg-black px-[16px] py-[14px] text-[14.4px] font-semibold leading-[19.2px] text-white">
               <motion.div
                 initial={{
                   opacity: 0,

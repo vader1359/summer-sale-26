@@ -45,7 +45,7 @@ export function Navigation() {
             </select>
           </label>
 
-          <Link href="/summer26" className="flex shrink-0 items-center justify-center gap-[7.2px] whitespace-nowrap rounded-[104.4px] bg-black px-4 py-[14px] text-[14.4px] font-semibold leading-[19.2px] text-white transition-all hover:bg-zinc-800 max-sm:gap-1.5 max-sm:px-2.5 max-sm:py-1.5 max-sm:text-[11px]">
+          <Link href="/summer26-list" className="flex shrink-0 items-center justify-center gap-[7.2px] whitespace-nowrap rounded-[104.4px] bg-black px-4 py-[14px] text-[14.4px] font-semibold leading-[19.2px] text-white transition-all hover:bg-zinc-800 max-sm:gap-1.5 max-sm:px-2.5 max-sm:py-1.5 max-sm:text-[11px]">
             {t.home.navigation.exploreCta}
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[36px] bg-white text-black max-sm:h-4 max-sm:w-4">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

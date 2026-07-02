@@ -170,7 +170,7 @@ export function FeaturedDeals() {
         </div>
 
         <div className="mt-[60px] flex justify-center">
-          <Link href="/summer26" className="flex h-12 items-center gap-[7.2px] rounded-[104px] bg-black px-4 text-[14.4px] font-semibold leading-[19.2px] text-white">
+          <Link href="/summer26-list" className="flex h-12 items-center gap-[7.2px] rounded-[104px] bg-black px-4 text-[14.4px] font-semibold leading-[19.2px] text-white">
             {t.home.featuredDeals.cta}
             <span className="flex h-6 w-6 items-center justify-center rounded-[36px] bg-white text-black">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

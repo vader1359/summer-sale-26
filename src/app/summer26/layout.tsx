@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Đặt trước USM Haller tại nanoHome | Ưu đãi chính hãng",
-  description:
-    "Đặt trước sản phẩm USM Haller chính hãng tại nanoHome, nhận ưu đãi giới hạn và tư vấn cấu hình nội thất mô-đun Thụy Sĩ cho không gian sống.",
+  title: "nanoHome - Summer Sale",
+  description: "nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.",
   alternates: {
     canonical: "/summer26",
-    languages: {
-      vi: "/summer26",
-      en: "/summer26",
-      ko: "/summer26",
-    },
   },
   openGraph: {
-    title: "Đặt trước USM Haller tại nanoHome | Ưu đãi chính hãng",
-    description:
-      "Đặt trước USM Haller chính hãng tại nanoHome với ưu đãi giới hạn và tư vấn showroom tại Việt Nam.",
+    title: "nanoHome - Summer Sale",
+    description: "nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.",
     url: "/summer26",
     type: "website",
     locale: "vi_VN",
@@ -24,19 +17,18 @@ export const metadata: Metadata = {
         url: "/preorder-assets/preorderbanner.png",
         width: 1200,
         height: 630,
-        alt: "Đặt trước USM Haller tại nanoHome",
+        alt: "nanoHome Summer Sale",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Đặt trước USM Haller tại nanoHome | Ưu đãi chính hãng",
-    description:
-      "Đặt trước USM Haller tại nanoHome với ưu đãi giới hạn và tư vấn cấu hình chính hãng.",
+    title: "nanoHome - Summer Sale",
+    description: "nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.",
     images: [
       {
         url: "/preorder-assets/preorderbanner.png",
-        alt: "Đặt trước USM Haller tại nanoHome",
+        alt: "nanoHome Summer Sale",
       },
     ],
   },
