@@ -1,57 +1,45 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const statusPath = path.join(process.cwd(), "src/app/summer26/sold-status.json");
-
-type SoldStatus = {
-  soldSkus: string[];
-  updatedAt?: string;
-};
-
-function normalizeSoldSkus(value: unknown): string[] {
-  if (!Array.isArray(value)) return [];
-  return [...new Set(value.filter((sku): sku is string => typeof sku === "string" && sku.trim().length > 0))]
-    .map((sku) => sku.trim())
-    .sort((a, b) => a.localeCompare(b));
+async function ensureTable() {
+  await sql`
+    CREATE TABLE IF NOT EXISTS summer26_sold_products (
+      sku TEXT PRIMARY KEY,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
 }
 
-async function readStatus(): Promise<SoldStatus> {
-  try {
-    const raw = await readFile(statusPath, "utf8");
-    const parsed = JSON.parse(raw) as Partial<SoldStatus>;
-    return {
-      soldSkus: normalizeSoldSkus(parsed.soldSkus),
-      updatedAt: typeof parsed.updatedAt === "string" ? parsed.updatedAt : undefined,
-    };
-  } catch (error) {
-    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
-      return { soldSkus: [] };
-    }
-    throw error;
-  }
+function normalizeSku(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const sku = value.trim();
+  return sku.length > 0 ? sku : null;
 }
 
-async function writeStatus(soldSkus: string[]): Promise<SoldStatus> {
-  const status = {
-    soldSkus: normalizeSoldSkus(soldSkus),
-    updatedAt: new Date().toISOString(),
-  };
-  await mkdir(path.dirname(statusPath), { recursive: true });
-  await writeFile(statusPath, `${JSON.stringify(status, null, 2)}\n`, "utf8");
-  return status;
+function jsonError(message: string, status = 500) {
+  return NextResponse.json({ error: message }, { status });
 }
 
 export async function GET() {
-  const status = await readStatus();
-  return NextResponse.json(status, {
-    headers: {
-      "Cache-Control": "no-store",
-    },
-  });
+  try {
+    await ensureTable();
+    const result = await sql<{ sku: string }>`
+      SELECT sku
+      FROM summer26_sold_products
+      ORDER BY sku ASC
+    `;
+
+    return NextResponse.json(
+      { soldSkus: result.rows.map((row) => row.sku) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  } catch (error) {
+    console.error("Failed to load sold products", error);
+    return jsonError("Database is not configured for sold products");
+  }
 }
 
 export async function PATCH(request: Request) {
@@ -59,34 +47,45 @@ export async function PATCH(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    return jsonError("Invalid JSON body", 400);
   }
 
   if (!body || typeof body !== "object") {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+    return jsonError("Invalid payload", 400);
   }
 
-  const { sku, sold, soldSkus } = body as {
-    sku?: unknown;
-    sold?: unknown;
-    soldSkus?: unknown;
-  };
+  const { sku, sold } = body as { sku?: unknown; sold?: unknown };
+  const normalizedSku = normalizeSku(sku);
 
-  if (Array.isArray(soldSkus)) {
-    return NextResponse.json(await writeStatus(normalizeSoldSkus(soldSkus)));
+  if (!normalizedSku || typeof sold !== "boolean") {
+    return jsonError("Expected sku and sold", 400);
   }
 
-  if (typeof sku !== "string" || sku.trim().length === 0 || typeof sold !== "boolean") {
-    return NextResponse.json({ error: "Expected sku and sold" }, { status: 400 });
-  }
+  try {
+    await ensureTable();
+    if (sold) {
+      await sql`
+        INSERT INTO summer26_sold_products (sku, updated_at)
+        VALUES (${normalizedSku}, NOW())
+        ON CONFLICT (sku)
+        DO UPDATE SET updated_at = NOW()
+      `;
+    } else {
+      await sql`
+        DELETE FROM summer26_sold_products
+        WHERE sku = ${normalizedSku}
+      `;
+    }
 
-  const current = await readStatus();
-  const next = new Set(current.soldSkus);
-  if (sold) {
-    next.add(sku.trim());
-  } else {
-    next.delete(sku.trim());
-  }
+    const result = await sql<{ sku: string }>`
+      SELECT sku
+      FROM summer26_sold_products
+      ORDER BY sku ASC
+    `;
 
-  return NextResponse.json(await writeStatus([...next]));
+    return NextResponse.json({ soldSkus: result.rows.map((row) => row.sku) });
+  } catch (error) {
+    console.error("Failed to update sold product", error);
+    return jsonError("Database is not configured for sold products");
+  }
 }
