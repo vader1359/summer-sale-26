@@ -17,6 +17,8 @@ type AdminProduct = {
 
 type BrandFilter = "all" | "fritzHansen" | "usm" | "louisPoulsen";
 
+const ADMIN_PASSWORD = "SUMM3R";
+const ADMIN_SESSION_KEY = "summer26_admin_unlocked_v1";
 const PRODUCTS = productData as AdminProduct[];
 
 const BRAND_LOGOS: Partial<Record<BrandFilter, { src: string; alt: string; width: number; height: number; className: string }>> = {
@@ -66,6 +68,11 @@ function getDiscountPercent(retailPrice: number, preorderPrice: number): number 
 }
 
 export default function SoldAdminPage() {
+  const [isUnlocked, setIsUnlocked] = useState(
+    () => typeof window !== "undefined" && window.sessionStorage.getItem(ADMIN_SESSION_KEY) === "true",
+  );
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [brand, setBrand] = useState<BrandFilter>("all");
   const [query, setQuery] = useState("");
   const [soldSkus, setSoldSkus] = useState<Set<string>>(() => new Set());
@@ -75,6 +82,7 @@ export default function SoldAdminPage() {
   const suppressNextClickRef = useRef(false);
 
   useEffect(() => {
+    if (!isUnlocked) return;
     fetch("/api/summer26/sold-status", { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : Promise.reject()))
       .then((data: { soldSkus?: unknown }) => {
@@ -83,7 +91,7 @@ export default function SoldAdminPage() {
         }
       })
       .catch(() => setError("Database is not connected."));
-  }, []);
+  }, [isUnlocked]);
 
   useEffect(() => {
     const closeMenu = () => setMenu(null);
@@ -151,6 +159,45 @@ export default function SoldAdminPage() {
     { id: "usm", label: "USM" },
     { id: "louisPoulsen", label: "Louis Poulsen" },
   ];
+
+  const handlePasswordSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (password !== ADMIN_PASSWORD) {
+      setPasswordError("Wrong password.");
+      return;
+    }
+    window.sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+    setPasswordError("");
+    setIsUnlocked(true);
+  };
+
+  if (!isUnlocked) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-white px-5 text-[#111111]">
+        <form onSubmit={handlePasswordSubmit} className="w-full max-w-[360px] border border-[#dddddd] p-5">
+          <h1 className="mb-5 text-[22px] font-semibold">Sold admin</h1>
+          <label htmlFor="admin-password" className="mb-2 block text-[13px] font-medium text-[#555555]">
+            Password
+          </label>
+          <input
+            id="admin-password"
+            type="password"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+              setPasswordError("");
+            }}
+            className="h-11 w-full border border-[#D8D8D8] px-3 text-[14px] outline-none transition focus:border-[#111111]"
+            autoFocus
+          />
+          {passwordError && <p className="mt-2 text-[13px] font-medium text-[#930000]">{passwordError}</p>}
+          <button type="submit" className="mt-5 h-11 w-full bg-black text-[13px] font-semibold uppercase tracking-[0.05em] text-white">
+            Unlock
+          </button>
+        </form>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
