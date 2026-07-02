@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function SummerSaleListPreviewPage() {
-  return <PreorderPage />;
+  return <PreorderPage showAllProducts />;
 }

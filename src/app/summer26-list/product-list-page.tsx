@@ -605,12 +605,14 @@ function ProductGrid({
   lang,
   gridRef,
   soldSkus,
+  showAllProducts = false,
 }: {
   page: number;
   products: PreorderProduct[];
   lang: Language;
   gridRef: React.RefObject<HTMLElement | null>;
   soldSkus: Set<string>;
+  showAllProducts?: boolean;
 }) {
   const t = translations[lang];
   const cells = useMemo(() => buildPage(page, products), [page, products]);
@@ -618,7 +620,14 @@ function ProductGrid({
   return (
     <section ref={gridRef} className="scroll-mt-[88px] w-full bg-white" aria-label={t.productGridAriaLabel}>
       <div className="grid w-full grid-flow-row-dense grid-cols-2 gap-0 divide-x divide-y divide-[#E5E5E5] md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-        {cells.map((cell, idx) => {
+        {showAllProducts
+          ? products.map((product) => (
+              <div key={product.sku} className="flex">
+                <ProductCard product={product} lang={lang} isSold={soldSkus.has(product.sku)} />
+              </div>
+            ))
+          : null}
+        {!showAllProducts && cells.map((cell, idx) => {
           if (cell.kind === "packshot") {
             return (
               <div key={`p-${page}-${idx}`} className="flex">
@@ -699,7 +708,7 @@ function FinalPolicySection({ lang }: { lang: Language }) {
 
 // ----- MAIN PAGE -----
 
-function PreorderPageContent() {
+function PreorderPageContent({ showAllProducts = false }: { showAllProducts?: boolean }) {
   const [lang, setLangState] = useState<Language>(() => getStoredLanguage());
   const [page, setPage] = useState(0);
   const [brand, setBrand] = useState<BrandFilter>("all");
@@ -808,8 +817,11 @@ function PreorderPageContent() {
             lang={lang}
             gridRef={productGridRef}
             soldSkus={soldSkus}
+            showAllProducts={showAllProducts}
           />
-          <Pagination current={currentPage} total={totalPages} onChange={handlePageChange} lang={lang} />
+          {!showAllProducts && (
+            <Pagination current={currentPage} total={totalPages} onChange={handlePageChange} lang={lang} />
+          )}
         </section>
 
         <FinalPolicySection lang={lang} />
@@ -824,10 +836,10 @@ function PreorderPageContent() {
   );
 }
 
-export default function PreorderPage() {
+export default function PreorderPage({ showAllProducts = false }: { showAllProducts?: boolean }) {
   return (
     <CartProvider>
-      <PreorderPageContent />
+      <PreorderPageContent showAllProducts={showAllProducts} />
     </CartProvider>
   );
 }
