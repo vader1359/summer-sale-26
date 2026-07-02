@@ -116,11 +116,15 @@ const CONTACT_GATE_TEXT: Record<
 
 export function hasCompletedContactGate(): boolean {
   if (typeof window === "undefined") return false;
-  return window.sessionStorage.getItem(CONTACT_GATE_STORAGE_KEY) === "true";
+  return (
+    window.localStorage.getItem(CONTACT_GATE_STORAGE_KEY) === "true" ||
+    window.sessionStorage.getItem(CONTACT_GATE_STORAGE_KEY) === "true"
+  );
 }
 
 function markContactGateCompleted() {
   if (typeof window === "undefined") return;
+  window.localStorage.setItem(CONTACT_GATE_STORAGE_KEY, "true");
   window.sessionStorage.setItem(CONTACT_GATE_STORAGE_KEY, "true");
 }
 
