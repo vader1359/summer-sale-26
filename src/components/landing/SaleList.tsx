@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { products, type Product } from "@/lib/products";
+import { useLanguage } from "@/lib/i18n/language-context";
+
+const loopProducts = [...products, ...products, ...products];
 
 export function SaleList() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   const scrollCarousel = (direction: "previous" | "next") => {
     const carousel = carouselRef.current;
@@ -15,7 +20,7 @@ export function SaleList() {
     }
 
     carousel.scrollBy({
-      left: direction === "next" ? 275 : -275,
+      left: direction === "next" ? 316 : -316,
       behavior: "smooth",
     });
   };
@@ -24,17 +29,17 @@ export function SaleList() {
     <section className="bg-[#fffdfa] pb-[60px] pt-[60px]">
       <div className="content-shell mb-[75px] flex flex-col items-center gap-4 text-center max-md:mb-10">
         <h2 className="text-[72px] font-semibold uppercase leading-[72px] text-[#ff3401] max-md:text-[48px] max-md:leading-[50px] max-sm:text-[38px]">
-          Summer Sale List
+          {t.home.saleList.heading}
         </h2>
         <p className="text-[24px] font-semibold uppercase leading-[25.2px] text-[#1a1a1a] max-sm:text-[18px]">
-          Danh sách sản phẩm
+          {t.home.saleList.subtitle}
         </p>
       </div>
 
       <div className="content-shell relative">
         <button
           className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#111] shadow-[0_2px_12px_rgba(17,17,17,0.12)] max-md:hidden"
-          aria-label="Previous products"
+          aria-label={t.home.saleList.previousAriaLabel}
           type="button"
           onClick={() => scrollCarousel("previous")}
         >
@@ -44,15 +49,17 @@ export function SaleList() {
         </button>
         <div
           ref={carouselRef}
-          className="scrollbar-none flex gap-6 overflow-x-auto scroll-smooth pb-3 snap-x snap-mandatory"
+          className="scrollbar-none overflow-x-auto scroll-smooth pb-3 snap-x snap-mandatory"
         >
-          {products.map((product) => (
-            <SaleProductCard key={product.id} product={product} />
-          ))}
+          <div className="sale-list-loop-track flex w-max gap-6">
+            {loopProducts.map((product, index) => (
+              <SaleProductCard key={`${product.id}-${index}`} product={product} />
+            ))}
+          </div>
         </div>
         <button
           className="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#111] shadow-[0_2px_12px_rgba(17,17,17,0.12)] max-md:hidden"
-          aria-label="Next products"
+          aria-label={t.home.saleList.nextAriaLabel}
           type="button"
           onClick={() => scrollCarousel("next")}
         >
@@ -66,32 +73,35 @@ export function SaleList() {
 }
 
 function SaleProductCard({ product }: { product: Product }) {
+  const { t } = useLanguage();
+  const productName = t.home.saleList.productNames[product.id] ?? product.name;
+
   return (
-    <article className="flex h-[379.2px] w-[251.2px] shrink-0 snap-center flex-col rounded-[8px] bg-[#F7F6F5] shadow-[0_4px_18px_rgba(17,17,17,0.10)]">
-      <div className="relative m-4 h-[219.2px] w-[219.2px] overflow-hidden rounded-[6px] bg-[#F7F6F5]">
+    <article className="flex h-[410px] w-[292px] shrink-0 snap-center flex-col rounded-[8px] bg-[#F7F6F5] shadow-[0_4px_18px_rgba(17,17,17,0.10)] max-sm:h-[392px] max-sm:w-[260px]">
+      <div className="relative m-4 h-[260px] w-[260px] overflow-hidden rounded-[6px] bg-[#F7F6F5] max-sm:h-[228px] max-sm:w-[228px]">
         <Image
           src={product.image}
-          alt={product.name}
+          alt={productName}
           fill
           className="object-contain p-1"
-          sizes="220px"
+          sizes="(max-width: 640px) 228px, 260px"
         />
       </div>
       <div className="flex flex-1 flex-col px-4 pb-4">
         <BrandLogo brand={product.brand} />
         <h3 className="mt-2 line-clamp-1 text-[16px] font-normal leading-6 text-[#111]">
-          {product.name}
+          {productName}
         </h3>
-        <div className="mt-auto flex items-center gap-4">
-          <button className="h-9 rounded-full bg-black px-4 text-[14px] font-semibold leading-4 text-white">
-            Nhận ưu đãi
-          </button>
-          <button className="flex h-9 items-center gap-1 text-[14px] font-semibold leading-4 text-[#111]">
-            Nhận tư vấn
+        <div className="mt-auto flex items-center gap-3">
+          <Link href="/summer26" className="flex h-9 items-center whitespace-nowrap rounded-full bg-black px-4 text-[14px] font-semibold leading-4 text-white">
+            {t.home.saleList.offerCta}
+          </Link>
+          <Link href="/summer26" className="flex h-9 items-center gap-1 whitespace-nowrap text-[14px] font-semibold leading-4 text-[#111]">
+            {t.home.saleList.consultationCta}
             <svg width="5" height="9" viewBox="0 0 5 9" fill="none">
               <path d="m1 1 3 3.5L1 8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </article>

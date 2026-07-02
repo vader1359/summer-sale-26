@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="w-full bg-[#fffdfa]">
       <Image
-        src="/figma/hero.jpg"
-        alt="nanoHome interior"
+        src="/figma/hero.png"
+        alt={t.home.hero.imageAlt}
         width={2880}
         height={1620}
         preload

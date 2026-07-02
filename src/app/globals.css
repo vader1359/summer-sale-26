@@ -51,7 +51,13 @@ a {
     will-change: transform;
   }
 
-  .featured-loop-track:hover {
+  .sale-list-loop-track {
+    animation: sale-list-loop 48s linear infinite;
+    will-change: transform;
+  }
+
+  .featured-loop-track:hover,
+  .sale-list-loop-track:hover {
     animation-play-state: paused;
   }
 
@@ -65,10 +71,27 @@ a {
     }
   }
 
+  @keyframes sale-list-loop {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-33.333333% - 16px));
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .featured-loop-track {
+    .featured-loop-track,
+    .sale-list-loop-track {
       animation: none;
     }
+  }
+
+  body[data-preorder-cart-state="expanded"] .zalo-chat-widget {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
   }
 
   @media (max-width: 1440px) {
