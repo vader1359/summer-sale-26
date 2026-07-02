@@ -385,7 +385,7 @@ function TrustBadges({ lang }: { lang: Language }) {
 }
 
 
-function ProductCard({ product, lang }: { product: PreorderProduct; lang: Language }) {
+function ProductCard({ product, lang, isSold }: { product: PreorderProduct; lang: Language; isSold: boolean }) {
   const t = translations[lang];
   const { addItem, removeItem, items } = useCart();
   const isInCart = items.some((item) => item.id === product.sku);
@@ -409,6 +409,8 @@ function ProductCard({ product, lang }: { product: PreorderProduct; lang: Langua
   const brandLogo = getBrandLogo(product.sku);
 
   const handleToggleCart = () => {
+    if (isSold) return;
+
     if (isInCart) {
       pendingAddRef.current = false;
       removeItem(product.sku);
@@ -447,8 +449,15 @@ function ProductCard({ product, lang }: { product: PreorderProduct; lang: Langua
           alt={localizedProduct.productName}
           width={600}
           height={600}
-          className="h-full w-full object-contain p-8 transition duration-500 group-hover:scale-105 sm:p-10 lg:p-12"
+          className={`h-full w-full object-contain p-8 transition duration-500 sm:p-10 lg:p-12 ${
+            isSold ? "" : "group-hover:scale-105"
+          }`}
         />
+        {isSold && (
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#930000] px-7 py-3 text-[24px] font-black uppercase leading-none tracking-[0.12em] text-white shadow-xl sm:text-[30px]">
+            Sold
+          </span>
+        )}
       </div>
       <div className="flex flex-col gap-1 p-3 sm:p-4">
         <div className="mb-2 flex min-h-6 items-center justify-between gap-2 text-[10px] font-medium uppercase tracking-[0.08em] text-[#767676]">
@@ -487,11 +496,16 @@ function ProductCard({ product, lang }: { product: PreorderProduct; lang: Langua
         <button
           type="button"
           onClick={handleToggleCart}
+          disabled={isSold}
           className={`click_order mt-3 inline-flex w-fit items-center justify-center rounded-none px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.05em] text-white transition sm:text-[11px] ${
-            isInCart ? "bg-[#C70500]" : "bg-[#000000] hover:bg-[#333333] active:bg-[#C70500]"
+            isSold
+              ? "cursor-not-allowed bg-[#9a9a9a]"
+              : isInCart
+              ? "bg-[#C70500]"
+              : "bg-[#000000] hover:bg-[#333333] active:bg-[#C70500]"
           }`}
         >
-          {isInCart ? t.productCard.addedToCart : t.productCard.cta}
+          {isSold ? "Sold" : isInCart ? t.productCard.addedToCart : t.productCard.cta}
         </button>
       </div>
     </article>
@@ -590,11 +604,13 @@ function ProductGrid({
   products,
   lang,
   gridRef,
+  soldSkus,
 }: {
   page: number;
   products: PreorderProduct[];
   lang: Language;
   gridRef: React.RefObject<HTMLElement | null>;
+  soldSkus: Set<string>;
 }) {
   const t = translations[lang];
   const cells = useMemo(() => buildPage(page, products), [page, products]);
@@ -606,7 +622,7 @@ function ProductGrid({
           if (cell.kind === "packshot") {
             return (
               <div key={`p-${page}-${idx}`} className="flex">
-                <ProductCard product={cell.product} lang={lang} />
+                <ProductCard product={cell.product} lang={lang} isSold={soldSkus.has(cell.product.sku)} />
               </div>
             );
           }
@@ -691,6 +707,7 @@ function PreorderPageContent() {
   const [showNotification, setShowNotification] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isContactGateOpen, setIsContactGateOpen] = useState(false);
+  const [soldSkus, setSoldSkus] = useState<Set<string>>(() => new Set());
   const productGridRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -705,6 +722,21 @@ function PreorderPageContent() {
       }
     }, 3000);
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/summer26/sold-status", { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : { soldSkus: [] }))
+      .then((data: { soldSkus?: unknown }) => {
+        if (!isMounted || !Array.isArray(data.soldSkus)) return;
+        setSoldSkus(new Set(data.soldSkus.filter((sku): sku is string => typeof sku === "string")));
+      })
+      .catch(() => undefined);
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const setLang = (nextLang: Language) => {
@@ -770,7 +802,13 @@ function PreorderPageContent() {
             onToggleSort={handleToggleSort}
             lang={lang}
           />
-          <ProductGrid page={currentPage} products={filteredProducts} lang={lang} gridRef={productGridRef} />
+          <ProductGrid
+            page={currentPage}
+            products={filteredProducts}
+            lang={lang}
+            gridRef={productGridRef}
+            soldSkus={soldSkus}
+          />
           <Pagination current={currentPage} total={totalPages} onChange={handlePageChange} lang={lang} />
         </section>
 
