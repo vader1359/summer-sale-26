@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     images: [
       {
-        url: "/preorder-assets/preorderbanner.png",
-        width: 1200,
-        height: 630,
-        alt: "nanoHome Summer Sale",
+        url: "/figma/hero.png",
+        width: 3840,
+        height: 2160,
+        alt: "nanoHome Summer Sale Hero Banner",
       },
     ],
   },
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     description: "nanoHome là đơn vị bán sản phẩm USM độc quyền duy nhất tại Việt Nam.",
     images: [
       {
-        url: "/preorder-assets/preorderbanner.png",
-        alt: "nanoHome Summer Sale",
+        url: "/figma/hero.png",
+        alt: "nanoHome Summer Sale Hero Banner",
       },
     ],
   },
