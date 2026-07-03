@@ -314,7 +314,7 @@ export default function SoldAdminPage() {
                   )}
                 </div>
                 <h2 className="truncate text-[15px] font-semibold leading-tight text-[#000000] sm:text-[16px]">
-                  {product.short_name}
+                  {product.short_name} | {product.sku}
                 </h2>
                 <p className="line-clamp-2 max-w-[34ch] text-balance text-[12px] leading-tight text-[#767676]">
                   {product.product_name}
