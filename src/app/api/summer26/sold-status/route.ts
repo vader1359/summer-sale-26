@@ -1,5 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
+import soldSkuSeed from "../../../summer26/sold-skus.json";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -23,6 +24,14 @@ function jsonError(message: string, status = 500) {
   return NextResponse.json({ error: message }, { status });
 }
 
+function getSeedSoldSkus() {
+  return soldSkuSeed.filter((sku): sku is string => typeof sku === "string" && sku.trim().length > 0);
+}
+
+function mergeSoldSkus(skus: string[]) {
+  return Array.from(new Set([...getSeedSoldSkus(), ...skus])).sort((a, b) => a.localeCompare(b));
+}
+
 export async function GET() {
   try {
     await ensureTable();
@@ -33,12 +42,15 @@ export async function GET() {
     `;
 
     return NextResponse.json(
-      { soldSkus: result.rows.map((row) => row.sku) },
+      { soldSkus: mergeSoldSkus(result.rows.map((row) => row.sku)) },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
     console.error("Failed to load sold products", error);
-    return jsonError("Database is not configured for sold products");
+    return NextResponse.json(
+      { soldSkus: mergeSoldSkus([]) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   }
 }
 
@@ -83,7 +95,7 @@ export async function PATCH(request: Request) {
       ORDER BY sku ASC
     `;
 
-    return NextResponse.json({ soldSkus: result.rows.map((row) => row.sku) });
+    return NextResponse.json({ soldSkus: mergeSoldSkus(result.rows.map((row) => row.sku)) });
   } catch (error) {
     console.error("Failed to update sold product", error);
     return jsonError("Database is not configured for sold products");
