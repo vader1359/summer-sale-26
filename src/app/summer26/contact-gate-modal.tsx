@@ -20,7 +20,7 @@ interface FormErrors {
 const CONTACT_GATE_STORAGE_KEY = "summer26_contact_gate_completed_v1";
 const CONTACT_GATE_PROFILE_STORAGE_KEY = "summer26_contact_gate_profile_v1";
 const CONTACT_GATE_WISTIA_SRC =
-  "https://fast.wistia.net/embed/iframe/09rnmxq8yg?videoFoam=true&autoPlay=true&silentAutoPlay=allow&muted=true&volume=0&endVideoBehavior=loop&controlsVisibleOnLoad=false&playbar=false&fullscreenButton=false&smallPlayButton=false&volumeControl=false";
+  "https://fast.wistia.net/embed/iframe/09rnmxq8yg?videoFoam=true&fitStrategy=contain&autoPlay=true&silentAutoPlay=allow&muted=true&volume=0&endVideoBehavior=loop&controlsVisibleOnLoad=false&playbar=false&fullscreenButton=false&smallPlayButton=false&volumeControl=false";
 
 const CONTACT_GATE_TEXT: Record<
   Language,
@@ -311,14 +311,16 @@ export function ContactGateModal({ isOpen, language, onUnlock }: ContactGateModa
         ref={modalRef}
         className="relative flex max-h-[calc(100vh-32px)] w-full max-w-[860px] overflow-hidden rounded-[8px] bg-white text-[#111111] shadow-[0_24px_60px_rgba(0,0,0,0.25)] md:min-h-[560px] md:flex-row"
       >
-        <div className="relative hidden w-[454px] shrink-0 md:block">
-          <iframe
-            src={CONTACT_GATE_WISTIA_SRC}
-            title="nanoHome Summer Sale video"
-            allow="autoplay; fullscreen"
-            allowFullScreen
-            className="h-full w-full border-0 outline-none"
-          />
+        <div className="hidden w-[454px] shrink-0 items-center justify-center bg-white p-8 md:flex">
+          <div className="relative aspect-[9/16] w-full max-w-[315px] overflow-hidden bg-white">
+            <iframe
+              src={CONTACT_GATE_WISTIA_SRC}
+              title="nanoHome Summer Sale video"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0 outline-none"
+            />
+          </div>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col overflow-y-auto p-6 md:p-7">

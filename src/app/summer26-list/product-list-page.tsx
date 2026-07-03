@@ -708,7 +708,7 @@ function PreorderPageContent({ showAllProducts = false }: { showAllProducts?: bo
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [showNotification, setShowNotification] = useState(true);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isContactGateOpen, setIsContactGateOpen] = useState(false);
+  const [isContactGateOpen, setIsContactGateOpen] = useState(() => !hasCompletedContactGate());
   const [soldSkus, setSoldSkus] = useState<Set<string>>(() => new Set());
   const productGridRef = useRef<HTMLElement | null>(null);
 
@@ -717,13 +717,7 @@ function PreorderPageContent({ showAllProducts = false }: { showAllProducts?: bo
   }, []);
 
   useEffect(() => {
-    if (hasCompletedContactGate()) return;
-    const timer = window.setTimeout(() => {
-      if (!hasCompletedContactGate()) {
-        setIsContactGateOpen(true);
-      }
-    }, 3000);
-    return () => window.clearTimeout(timer);
+    setIsContactGateOpen(!hasCompletedContactGate());
   }, []);
 
   useEffect(() => {
