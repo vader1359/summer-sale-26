@@ -1080,6 +1080,15 @@
     "image": "/list_packshot/louis_poulsen/LTLLP00008.jpg"
   },
   {
+    "category": "Đèn sàn",
+    "sku": "LFLLP00004",
+    "short_name": "Đèn sàn PANTHELLA FLOOR",
+    "product_name": "Đèn sàn PANTHELLA FLOOR, model 5744167068, hiệu Louis Poulsen, kích thước 500x1290x500 mm, bằng nhựa và kim loại, màu opal white",
+    "retail_price": 42900000,
+    "preorder_price": 30030000,
+    "image": "/list_packshot/louis_poulsen/LFLLP00004.webp"
+  },
+  {
     "category": "Đèn bàn",
     "sku": "LTLLP00001",
     "short_name": "Đèn Bàn 3½-2½",
@@ -1114,6 +1123,15 @@
     "retail_price": 158000000,
     "preorder_price": 110600000,
     "image": "/list_packshot/louis_poulsen/LPLLP00062.jpeg"
+  },
+  {
+    "category": "Đèn ngoài trời",
+    "sku": "ALTLP00002",
+    "short_name": "Đèn FLINDT GARDEN BOLLARD",
+    "product_name": "Đèn FLINDT GARDEN BOLLARD, DI105 x H345 mm, LED 2700K 6.5W, Bằng Aluminum, Màu Nâu Corten",
+    "retail_price": 12230000,
+    "preorder_price": 8561000,
+    "image": "/list_packshot/louis_poulsen/ALTLP00002.webp"
   },
   {
     "category": "Ghế",

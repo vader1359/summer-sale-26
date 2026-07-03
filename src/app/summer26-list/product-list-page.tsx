@@ -123,7 +123,12 @@ type BrandFilter = "all" | "fritzHansen" | "usm" | "louisPoulsen";
 function getProductBrand(sku: string): BrandFilter {
   if (sku.startsWith("USMUS")) return "usm";
   if (sku.startsWith("CHRFR") || sku.startsWith("CHRFH") || sku.startsWith("TBLFH")) return "fritzHansen";
-  if (sku.startsWith("LTLLP") || sku.startsWith("LPLLP")) return "louisPoulsen";
+  if (
+    sku.startsWith("LTLLP") ||
+    sku.startsWith("LPLLP") ||
+    sku.startsWith("LFLLP") ||
+    sku.startsWith("ALTLP")
+  ) return "louisPoulsen";
   return "all";
 }
 
