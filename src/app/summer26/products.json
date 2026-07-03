@@ -238,8 +238,8 @@
     "sku": "USMUS10526",
     "short_name": "Tủ USM Haller",
     "product_name": "Tủ USM Haller, kích thước 523x373x565 mm, bằng kim loại, màu Pure orange",
-    "retail_price": 63580000,
-    "preorder_price": 44506000,
+    "retail_price": 41330000,
+    "preorder_price": 28931000,
     "image": "/list_packshot/usm/USMUS10526.jpg"
   },
   {
@@ -298,66 +298,12 @@
   },
   {
     "category": "Kệ",
-    "sku": "USMUS10533",
-    "short_name": "Kệ nội thất văn phòng USM Haller",
-    "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 1523x373x740 mm, bằng kim loại, màu Golden yellow",
-    "retail_price": 45130000,
-    "preorder_price": 31591000,
-    "image": "/list_packshot/usm/USMUS10533.jpg"
-  },
-  {
-    "category": "Kệ",
-    "sku": "USMUS10534",
-    "short_name": "Kệ nội thất văn phòng USM Haller",
-    "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 1523x373x740 mm, bằng kim loại, màu beige",
-    "retail_price": 45130000,
-    "preorder_price": 31591000,
-    "image": "/list_packshot/usm/USMUS10534.jpg"
-  },
-  {
-    "category": "Kệ",
-    "sku": "USMUS10535",
-    "short_name": "Kệ nội thất văn phòng USM Haller",
-    "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 773x373x1090 mm, bằng kim loại, màu beige",
-    "retail_price": 35420000,
-    "preorder_price": 24794000,
-    "image": "/list_packshot/usm/USMUS10535.jpg"
-  },
-  {
-    "category": "Kệ",
     "sku": "USMUS10536",
     "short_name": "Kệ nội thất văn phòng USM Haller",
     "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 1023x523x390 mm, bằng kim loại, màu transparent, USM beige",
     "retail_price": 50180000,
     "preorder_price": 35126000,
     "image": "/list_packshot/usm/USMUS10536.jpg"
-  },
-  {
-    "category": "Kệ",
-    "sku": "USMUS10537",
-    "short_name": "Kệ nội thất văn phòng USM Haller",
-    "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 523x373x1090 mm, bằng kim loại, màu Pure white",
-    "retail_price": 61240000,
-    "preorder_price": 42868000,
-    "image": "/list_packshot/usm/USMUS10537.jpg"
-  },
-  {
-    "category": "Kệ",
-    "sku": "USMUS10538",
-    "short_name": "Kệ nội thất văn phòng USM Haller",
-    "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 2273x373x390 mm, bằng kim loại, màu pure white",
-    "retail_price": 52530000,
-    "preorder_price": 36771000,
-    "image": "/list_packshot/usm/USMUS10538.jpg"
-  },
-  {
-    "category": "Kệ",
-    "sku": "USMUS10539",
-    "short_name": "Kệ nội thất văn phòng USM Haller",
-    "product_name": "Kệ nội thất văn phòng USM Haller, kích thước 773x373x740 mm, bằng kim loại, màu Pure white",
-    "retail_price": 26030000,
-    "preorder_price": 18221000,
-    "image": "/list_packshot/usm/USMUS10539.jpg"
   },
   {
     "category": "Kệ",
@@ -739,15 +685,6 @@
   },
   {
     "category": "Tủ",
-    "sku": "USMUS10465-1",
-    "short_name": "Tủ nội thất văn phòng USM Haller",
-    "product_name": "Tủ nội thất văn phòng USM Haller, kích thước 2273x373x740 mm, bằng kim loại, màu Beige | HOUSE",
-    "retail_price": 143500000,
-    "preorder_price": 100450000,
-    "image": "/list_packshot/usm/USMUS10465-1.jpg"
-  },
-  {
-    "category": "Tủ",
     "sku": "USMUS10476",
     "short_name": "Tủ nội thất văn phòng USM HALLER",
     "product_name": "Tủ nội thất văn phòng USM HALLER, kích thước 2023x373x915 mm, bằng kim loại, màu USM beige | HANOI | SILENT SALE",
@@ -1069,6 +1006,114 @@
     "retail_price": 521450000,
     "preorder_price": 365015000,
     "image": "/list_packshot/louis_poulsen/LPLLP00025.jpg"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00068",
+    "short_name": "Đèn bàn VL45 RADIO 175",
+    "product_name": "Đèn bàn VL45 RADIO 175, model 5744171737, hiệu Louis Poulsen, kích thước 175x175x205 mm, bằng glass, metal, màu yellow",
+    "retail_price": 19290000,
+    "preorder_price": 13503000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00068.jpg"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00069",
+    "short_name": "Đèn bàn VL45 RADIO 175",
+    "product_name": "Đèn bàn VL45 RADIO 175, model 5744171711, hiệu Louis Poulsen, kích thước 175x175x205 mm, bằng glass, metal, màu opal white",
+    "retail_price": 19290000,
+    "preorder_price": 13503000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00069.jpg"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00070",
+    "short_name": "Đèn bàn VL45 RADIO 175",
+    "product_name": "Đèn bàn VL45 RADIO 175, model 5744171724, hiệu Louis Poulsen, kích thước 175x175x205 mm, bằng glass, metal, màu pale rose",
+    "retail_price": 19290000,
+    "preorder_price": 13503000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00070.jpg"
+  },
+  {
+    "category": "Đèn thả",
+    "sku": "LPLLP00057",
+    "short_name": "Đèn thả VL45 RADIO 175",
+    "product_name": "Đèn thả VL45 RADIO 175, model 5741115123, hiệu Louis Poulsen, kích thước 175x246x175 mm, bằng glass, metal, màu pale yellow",
+    "retail_price": 18390000,
+    "preorder_price": 12873000,
+    "image": "/list_packshot/louis_poulsen/LPLLP00057.jpg"
+  },
+  {
+    "category": "Đèn thả",
+    "sku": "LPLLP00058",
+    "short_name": "Đèn thả VL45 RADIO 175",
+    "product_name": "Đèn thả VL45 RADIO 175, model 5741115110, hiệu Louis Poulsen, kích thước 175x246x175 mm, bằng glass, metal, màu amber",
+    "retail_price": 18390000,
+    "preorder_price": 12873000,
+    "image": "/list_packshot/louis_poulsen/LPLLP00058.jpg"
+  },
+  {
+    "category": "Đèn thả",
+    "sku": "LPLLP00059",
+    "short_name": "Đèn thả VL45 RADIO 250",
+    "product_name": "Đèn thả VL45 RADIO 250, model 5741115149, hiệu Louis Poulsen, kích thước 250x328x250 mm, bằng glass, metal, màu pale yellow",
+    "retail_price": 22900000,
+    "preorder_price": 16030000,
+    "image": "/list_packshot/louis_poulsen/LPLLP00059.jpg"
+  },
+  {
+    "category": "Đèn thả",
+    "sku": "LPLLP00060",
+    "short_name": "Đèn thả VL45 RADIO 250",
+    "product_name": "Đèn thả VL45 RADIO 250, model 5741115136, hiệu Louis Poulsen, kích thước 250x328x250 mm, bằng glass, metal, màu amber",
+    "retail_price": 22900000,
+    "preorder_price": 16030000,
+    "image": "/list_packshot/louis_poulsen/LPLLP00060.jpg"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00008",
+    "short_name": "Đèn bàn PANTHELLA TABLE 320",
+    "product_name": "Đèn bàn PANTHELLA TABLE 320, model 5744167136, hiệu Louis Poulsen, kích thước 320x438x320 mm, bằng nhựa, màu white opal",
+    "retail_price": 30790000,
+    "preorder_price": 21553000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00008.jpg"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00001",
+    "short_name": "Đèn Bàn 3½-2½",
+    "product_name": "Đèn Bàn 3½-2½, DI33 x H46.5 cm, Bằng Thủy Tinh Opal Glass, Brass, Màu Đồng Thau",
+    "retail_price": 53020000,
+    "preorder_price": 37114000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00001.jpg"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00072",
+    "short_name": "Đèn bàn PH 80",
+    "product_name": "Đèn bàn PH 80, kích thước 230x230x305mm, bằng nhựa và nhôm, màu trắng",
+    "retail_price": 20900000,
+    "preorder_price": 14630000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00072.png"
+  },
+  {
+    "category": "Đèn bàn",
+    "sku": "LTLLP00075",
+    "short_name": "Đèn bàn Rumee 220",
+    "product_name": "Đèn bàn Rumee 220, kích thước 223x220x243mm, bằng nhựa, màu night blue",
+    "retail_price": 8900000,
+    "preorder_price": 6230000,
+    "image": "/list_packshot/louis_poulsen/LTLLP00075.png"
+  },
+  {
+    "category": "Đèn thả",
+    "sku": "LPLLP00062",
+    "short_name": "Đèn treo thả PH 3/2 Academy",
+    "product_name": "Đèn treo thả PH 3/2 Academy, hiệu Louis Poulsen, kích thước 680x680x345mm, bằng kim loại, Thủy Tinh Opal Glass, màu high lustre chrome plated",
+    "retail_price": 158000000,
+    "preorder_price": 110600000,
+    "image": "/list_packshot/louis_poulsen/LPLLP00062.jpeg"
   },
   {
     "category": "Ghế",

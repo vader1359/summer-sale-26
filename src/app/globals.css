@@ -88,10 +88,28 @@ a {
     }
   }
 
+  .zalo-chat-widget {
+    bottom: 64px !important;
+    right: 64px !important;
+  }
+
   body[data-preorder-cart-state="expanded"] .zalo-chat-widget {
     opacity: 0 !important;
     pointer-events: none !important;
     visibility: hidden !important;
+  }
+
+  @media (max-width: 640px) {
+    .zalo-chat-widget {
+      bottom: 32px !important;
+      right: 32px !important;
+      transform: scale(0.84) !important;
+      transform-origin: right bottom !important;
+    }
+
+    body[data-preorder-cart-state="collapsed"] .zalo-chat-widget {
+      bottom: 96px !important;
+    }
   }
 
   @media (max-width: 1440px) {

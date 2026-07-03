@@ -452,7 +452,7 @@ export function CartModal({ isOpen, onClose, language = "vi" }: CartModalProps) 
                 <Check size={26} />
               </div>
               <h3 className="mt-5 text-[22px] font-bold leading-7 tracking-[-0.02em] text-[#111111]">{t.successTitle}</h3>
-              <p className="mx-auto mt-3 max-w-[320px] text-[14px] leading-6 text-[#555555]">
+              <p className="mx-auto mt-3 max-w-[320px] whitespace-pre-line text-[14px] leading-6 text-[#555555]">
                 {t.successDescription}
               </p>
               <button

@@ -14,7 +14,6 @@ import {
   X,
 } from "lucide-react";
 import { STORAGE_KEY } from "@/lib/i18n";
-import { trackCartUsm } from "@/lib/analytics/meta-events";
 import { localizePreorderProductText, translations, Language } from "../summer26/i18n";
 import { CartProvider, useCart } from "../summer26/cart-context";
 import { CartModal } from "../summer26/cart-modal";
@@ -433,12 +432,6 @@ function ProductCard({ product, lang, isSold }: { product: PreorderProduct; lang
       preorderPrice: product.preorder_price,
       image: product.image,
     });
-    trackCartUsm({
-      content_name: localizedProduct.shortName,
-      content_ids: [product.sku],
-      content_type: "product",
-      num_items: 1,
-    });
   };
 
   return (
@@ -475,7 +468,7 @@ function ProductCard({ product, lang, isSold }: { product: PreorderProduct; lang
           )}
         </div>
         <h3 className="truncate text-[15px] font-semibold leading-tight text-[#000000] sm:text-[16px]">
-          {localizedProduct.shortName}
+          {localizedProduct.shortName} | {product.sku}
         </h3>
         <p className="line-clamp-2 max-w-[34ch] text-balance text-[12px] leading-tight text-[#767676]">
           {localizedProduct.productName}

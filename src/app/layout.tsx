@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { TrackingProvider } from "@/components/analytics/tracking-provider";
+import { ZaloWidget } from "@/components/zalo-widget";
 import "./globals.css";
 
 const summerSaleTitle = "nanoHome Summer Sale 2026";
@@ -48,7 +51,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className="h-full antialiased scroll-smooth">
-      <body className="min-h-full flex flex-col bg-[#fffdfa] text-zinc-900">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#fffdfa] text-zinc-900">
+        {children}
+        <ZaloWidget />
+        <TrackingProvider />
+        <Script src="https://sp.zalo.me/plugins/sdk.js" strategy="afterInteractive" />
+      </body>
     </html>
   );
 }
